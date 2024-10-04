@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Create a Task</title>
+  </head>
+  <body>
+    <h1>Create Your New Todo Task</h1>
+    <div>   
+        <a href="/todos/">Back to Your Tasks</a>
+    </div><br />
+
+
+
+         <div>
+        <form action="/todos" method="POST">
+            <label for="task">Task Name:</label>
+            <input type="text" name="task" id="task">
+        </form>
+        </div><br />
+
+
+    <div>
+        <form action="/todos" method="POST">
+        <label for="date">Date:</label>
+        <input type="text" name="date">
+    </div><br />
+
+
+        <div>
+    <form action="/todos" method="POST">
+        <label for="note">Notes:</label>
+        <input type="text" name="notes" id="notes">
+        <input type="checkbox" name="status">
+        <label>Did you finish?</label>
+    </form>
+    </div><br />
+        <input type="submit" name="saved task">
+
+
+  </body>
+</html>
