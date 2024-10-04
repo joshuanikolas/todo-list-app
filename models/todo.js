@@ -2,12 +2,23 @@ const mongoose = require("mongoose");
 const { boolean } = require("webidl-conversions");
 
 const todoSchema = new mongoose.Schema({
-    status: Boolean,
-    task: Boolean,
-    notes: String,
-    date: String,
-    taskName: String,
-    isFinished: Boolean
+    status: {
+        type: Boolean,
+        required: true,
+    },
+    task: {
+        type: Boolean,
+    },
+    notes: {
+        type: String,
+    },
+    date: {
+        type: String,
+    },
+    taskName: {
+        type: String,
+        required: true,
+    }
 });
 
 

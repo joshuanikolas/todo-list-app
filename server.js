@@ -1,5 +1,3 @@
-// Here is where we import modules
-// We begin by loading Express
 const dotenv = require("dotenv"); // require package
 dotenv.config(); // Loads the environment variables from .env file
 const express = require("express");
@@ -21,7 +19,7 @@ mongoose.connection.on("connected", () => {
 
 
 
-// GET /
+
 app.get("/", async (req, res) => {
     res.render("index.ejs");
   });
@@ -74,7 +72,7 @@ app.get("/todos/new", (req, res) => {
 
   app.get("/todos/:todoId", async (req, res) => {
     const foundTodo = await Todo.findById(req.params.todoId)
-    res.render(`This route renders the show page for todo id: ${req.params.todoIdId}!`);
+    res.render("todos/show.ejs", { todo: foundTodo});
   });
   
   
