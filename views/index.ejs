@@ -10,6 +10,13 @@
   <body>
     <h1>Welcome to Todo List App!</h1>
     <p>An app for organization and having all your tasks in one app.</p>
+    <ul>
+        <% todos.forEach(todo => { %>
+          <li>
+            <a href="/todos/<%= todo._id %>"> <%= todo.name %></a>
+            </li>
+        <% }); %>
+      </ul>
 <a href="/todos">Your Tasks</a>
 
 

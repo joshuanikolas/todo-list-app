@@ -36,9 +36,8 @@ app.get("/todos", async (req, res) => {
     res.render("todos/index.ejs", { todos: allTodos});
   });
 
-// server.js
 
-// POST /fruits
+
 app.post("/todos", async (req, res) => {
     if (req.body.isFinished === "on") {
       req.body.isFinished = true;
@@ -46,7 +45,7 @@ app.post("/todos", async (req, res) => {
       req.body.isFinished = false;
     }
     await Todo.create(req.body);
-    res.redirect("/todos"); // redirect to index fruits
+    res.redirect("/todos"); 
   });
   
   
@@ -72,6 +71,12 @@ app.get("/todos/new", (req, res) => {
     await Todo.create(req.body);
     res.redirect("/todos/new");
   });
+
+  app.get("/todos/:todoId", async (req, res) => {
+    const foundTodo = await Todo.findById(req.params.todoId)
+    res.render(`This route renders the show page for todo id: ${req.params.todoIdId}!`);
+  });
+  
   
 
 

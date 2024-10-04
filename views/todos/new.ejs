@@ -12,6 +12,7 @@
     </div><br />
 
 
+    <form action="/todos" method="POST">
 
          <div>
         <form action="/todos" method="POST">
@@ -24,7 +25,7 @@
     <div>
         <form action="/todos" method="POST">
         <label for="date">Date:</label>
-        <input type="text" name="date">
+        <input type="text" name="date" id="date">
     </div><br />
 
 
@@ -32,11 +33,11 @@
     <form action="/todos" method="POST">
         <label for="note">Notes:</label>
         <input type="text" name="notes" id="notes">
-        <input type="checkbox" name="status">
+        <input type="checkbox" name="status" id="status">
         <label>Did you finish?</label>
     </form>
     </div><br />
-        <input type="submit" name="saved task">
+        <button type="submit">Add Task</button>
 
 
   </body>

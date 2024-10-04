@@ -7,6 +7,7 @@ const todoSchema = new mongoose.Schema({
     notes: String,
     date: String,
     taskName: String,
+    isFinished: Boolean
 });
 
 
