@@ -2,6 +2,9 @@ const dotenv = require("dotenv"); // require package
 dotenv.config(); // Loads the environment variables from .env file
 const express = require("express");
 const mongoose = require("mongoose"); // require package
+const methodOverride = require("method-override"); // new
+const morgan = require("morgan"); //new
+
 
 const app = express();
 
@@ -17,12 +20,14 @@ const Todo = require("./models/todo.js");
 
 const createTodo = async() => {
     const todoData = {
-        
+
     }
 }
 const { todo } = require("node:test");
 
-  app.use(express.urlencoded({ extended: false }));
+app.use(express.urlencoded({ extended: false }));
+app.use(methodOverride("_method")); // new
+app.use(morgan("dev")); //new
 
 
 
@@ -81,6 +86,12 @@ app.get("/todos/new", (req, res) => {
     const foundTodo = await Todo.findById(req.params.todoId)
     res.render("todos/show.ejs", { todo: foundTodo});
   });
+
+  app.delete("/todos/:todoId", async (req, res) => {
+    await Todo.findByIdAndDelete(req.params.todoId)
+    res.redirect("/todos");
+  });
+  
 
   
 
