@@ -2,26 +2,25 @@ const mongoose = require("mongoose");
 const { boolean } = require("webidl-conversions");
 
 const todoSchema = new mongoose.Schema({
-    status: {
-        type: Boolean,
-        required: true,
-    },
-    task: {
-        type: Boolean,
-    },
     notes: {
         type: String,
     },
     date: {
         type: String,
     },
-    taskName: {
+    name: {
         type: String,
         required: true,
-    }
+    },
+     isFinished: {
+        type: Boolean
+        // type: mongoose.Schema.Types.ObjectId
+    },
 });
 
 
 const Todo = mongoose.model("Todo", todoSchema);
 
 module.exports = Todo;
+
+

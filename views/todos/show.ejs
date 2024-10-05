@@ -8,6 +8,8 @@
   <body>
     <a href="/todos/">Back to My Tasks</a>
     <h1><%= todo.name %></h1>
+    <p>Date: <%= todo.date %></p>
+    <p>Notes: <%= todo.notes %></p>
     <% if (todo.isFinished) { %>
         <p>This task is completed!</p>
       <% } else { %>

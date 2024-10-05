@@ -13,7 +13,14 @@ mongoose.connection.on("connected", () => {
   });
 
 
-  const Todo = require("./models/todo.js");
+const Todo = require("./models/todo.js");
+
+const createTodo = async() => {
+    const todoData = {
+        
+    }
+}
+const { todo } = require("node:test");
 
   app.use(express.urlencoded({ extended: false }));
 
@@ -74,7 +81,7 @@ app.get("/todos/new", (req, res) => {
     const foundTodo = await Todo.findById(req.params.todoId)
     res.render("todos/show.ejs", { todo: foundTodo});
   });
-  
+
   
 
 

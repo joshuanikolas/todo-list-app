@@ -10,6 +10,24 @@
   <body>
     <h1>Welcome to Todo List App!</h1>
     <p>An app for organization and having all your tasks in one app.</p>
+    <h2>Your Todo List</h2>
+  <ul>
+    <% todos.forEach(todo => { %>
+      <li>
+          <p>Task: <%= todo.name %></p>
+          <p>Date: <%= todo.date %></p>
+          <p>Notes: <%= todo.notes %></p>
+          <p>Completed? : <%= todo.isFinished %></p>
+      </li>
+
+
+
+    <% }); %>
+  </ul>
+<a href="/todos">Your Tasks</a>
+<a href="/todos/new">Add New Task</a>
+
+
     <ul>
         <% todos.forEach(todo => { %>
           <li>

@@ -6,17 +6,28 @@
     <title>Todo App</title>
   </head>
   <body>
-    <h1>Welcome to Your Todo List App!</h1>
+    <h1>Welcome to Todo List App!</h1>
+    <p>An app for organization and having all your tasks in one app.</p>
+
+    <div>
+        <a href="/todos">Your Tasks</a>
+        <a href="/todos/new">Add New Task</a>
+    </div>
+
     <h2>Your Todo List</h2>
-  <ul>
-    <% todos.forEach(todo => { %>
-      <li><%= todo.name %></li>
-    <% }); %>
-  </ul>
-<a href="/todos">Your Tasks</a>
-<a href="/todos/new">Add New Task</a>
-
-
+    <ul>
+        <% todos.forEach(todo => { %>
+          <li>
+            <a href="/todos/<%= todo._id %>"> 
+              <p><%= todo.name %></p>
+            </a>
+          <p>Date: <%= todo.date %></p>
+          <p>Notes: <%= todo.notes %></p>
+          <p>Completed? : <%= todo.isFinished %></p
+            
+        </li>
+        <% }); %>
+      </ul>
 
   </body>
 </html>
