@@ -1,0 +1,22 @@
+<body>
+    <h1>Update <%= todo.name %></h1>
+    <form action="/todos/<%=todo._id%>?_method=PUT" method="POST">
+      <label for="name">Name:</label>
+      <input type="text" name="name" id="name" value="<%= todo.name %>"/>
+  
+      <label for="date">Date:</label>
+      <input type="text" name="date" id="date">
+
+      <label for="note">Notes:</label>
+      <input type="text" name="notes" id="notes">
+
+      <label for="isFinished">Completed?</label>
+      <!-- <input type="checkbox" name="isFinished" /> -->
+      <!-- <input type="checkbox" name="isFinished" checked /> -->
+      <input type="checkbox" name="isFinished" <% if (todo.isFinished) { %>checked<% } %> >
+
+      <button type="submit">Update Task</button>
+    </form>
+    <a href="/todos">Back to Tasks</a>
+  </body>
+  

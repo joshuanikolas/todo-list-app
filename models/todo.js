@@ -23,4 +23,3 @@ const Todo = mongoose.model("Todo", todoSchema);
 
 module.exports = Todo;
 
-

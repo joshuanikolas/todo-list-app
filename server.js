@@ -92,10 +92,28 @@ app.get("/todos/new", (req, res) => {
     res.redirect("/todos");
   });
   
+app.get("/todos/:todoId/edit", async (req, res) => {
+    const foundTodo = await Todo.findById(req.params.todoId);
+    res.render("todos/edit.ejs", {
+        todo: foundTodo,
+      });
+    });
 
-  
+    app.put("/todos/:todoId", async (req, res) => {
+        // Handle the 'isReadyToEat' checkbox data
+        if (req.body.isFinished === "on") {
+          req.body.isFinished = true;
+        } else {
+          req.body.isFinished = false;
+        }
+        
+        // Update the fruit in the database
+        await Todo.findByIdAndUpdate(req.params.todoId, req.body);
+      
+        // Redirect to the fruit's show page to see the updates
+        res.redirect(`/todos/${req.params.todoId}`);
+      });
 
-
-app.listen(3000, () => {
-  console.log("Listening on port 3000");
-});
+      app.listen(3000, () => {
+        console.log("Listening on port 3000");
+      });

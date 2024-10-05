@@ -18,6 +18,8 @@
 
     <form action="/todos/<%=todo._id%>?_method=DELETE" method="POST">
         <button type="submit">Delete <%= todo.name %></button>
+        <a href="/todos/<%= todo._id %>/edit">Edit <%= todo.name %></a>
+        <a href="/todos">Back to Tasks</a>
     </form>
    
   </body>
