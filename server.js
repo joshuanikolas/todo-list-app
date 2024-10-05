@@ -1,10 +1,11 @@
-const dotenv = require("dotenv"); // require package
-dotenv.config(); // Loads the environment variables from .env file
+const dotenv = require("dotenv");
+dotenv.config(); 
 const express = require("express");
-const mongoose = require("mongoose"); // require package
+const mongoose = require("mongoose"); 
 const methodOverride = require("method-override"); // new
-const morgan = require("morgan"); //new
-
+const morgan = require("morgan"); 
+const authController = require("./controllers/auth.js");
+const session = require('express-session');
 
 const app = express();
 
@@ -16,7 +17,12 @@ mongoose.connection.on("connected", () => {
   });
 
 
+  app.use(express.urlencoded({ extended: false }));
+
 const Todo = require("./models/todo.js");
+app.use(methodOverride("_method"));
+app.use(morgan('dev'));
+
 
 const createTodo = async() => {
     const todoData = {
@@ -26,20 +32,27 @@ const createTodo = async() => {
 const { todo } = require("node:test");
 
 app.use(express.urlencoded({ extended: false }));
-app.use(methodOverride("_method")); // new
-app.use(morgan("dev")); //new
+app.use(methodOverride("_method"));
+app.use(morgan("dev"));
+app.use(
+    session({
+      secret: process.env.SESSION_SECRET,
+      resave: false,
+      saveUninitialized: true,
+    })
+  );
 
 
 
 
 app.get("/", async (req, res) => {
-    res.render("index.ejs");
+    res.render("index.ejs", {
+        user: req.session.user,
+    });
   });
   
+app.use("/auth", authController);
 
-app.get("/", async (req, res) => {
-    res.render("index.ejs");
-});
 
 app.get("/todos", async (req, res) => {
     const allTodos = await Todo.find();
@@ -100,20 +113,22 @@ app.get("/todos/:todoId/edit", async (req, res) => {
     });
 
     app.put("/todos/:todoId", async (req, res) => {
-        // Handle the 'isReadyToEat' checkbox data
         if (req.body.isFinished === "on") {
           req.body.isFinished = true;
         } else {
           req.body.isFinished = false;
         }
-        
-        // Update the fruit in the database
         await Todo.findByIdAndUpdate(req.params.todoId, req.body);
-      
-        // Redirect to the fruit's show page to see the updates
         res.redirect(`/todos/${req.params.todoId}`);
       });
 
-      app.listen(3000, () => {
-        console.log("Listening on port 3000");
-      });
+      let port;
+if (process.env.PORT) {
+  port = process.env.PORT;
+} else {
+  port = 3000;
+}
+
+app.listen(port, () => {
+    console.log(`The express app is ready on port ${port}!`);
+  });

@@ -14,9 +14,19 @@ const todoSchema = new mongoose.Schema({
     },
      isFinished: {
         type: Boolean
-        // type: mongoose.Schema.Types.ObjectId
     },
 });
+
+const userSchema = new mongoose.Schema({
+    username: {
+      type: String,
+      required: true,
+    },
+    password: {
+      type: String,
+      required: true,
+    },
+  });
 
 
 const Todo = mongoose.model("Todo", todoSchema);

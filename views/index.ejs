@@ -1,5 +1,3 @@
-<!-- views/index.ejs -->
-
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -9,36 +7,22 @@
   </head>
   <body>
     <h1>Welcome to Todo List App!</h1>
-    <p>An app for organization and having all your tasks in one app.</p>
-    <h2>Your Todo List</h2>
-  <ul>
-    <% todo.forEach(todo => { %>
-      <li>
-          <p>Task: <%= todo.name %></p>
-          <p>Date: <%= todo.date %></p>
-          <p>Notes: <%= todo.notes %></p>
-          <p>Completed? : <%= todo.isFinished %></p>
-      </li>
+    <h3>An app for organization and having all your tasks in one app.</h3>
 
+    <p>Existing user:</p>
+    <a href="/auth/sign-in">sign in</a>
 
-
-    <% }); %>
-  </ul>
-<a href="/todos">Your Tasks</a>
-<a href="/todos/new">Add New Task</a>
-
-
-    <ul>
-        <% todos.forEach(todo => { %>
-          <li>
-            <a href="/todos/<%= todo._id %>"> <%= todo.name %></a>
-            
-        </li>
-        <% }); %>
-      </ul>
-<a href="/todos">Your Tasks</a>
-
-
+        <% if (user) { %>
+        <h1>Welcome to the app, <%= user.username %>!</h1>
+        <p>
+        <a href="/auth/sign-out">Sign out</a>
+        </p>
+            <% } else { %>
+    <p>New user? Create an account:</p>
+        <p>
+            <a href="/auth/sign-up">Sign up</a>
+        </p>
+        <% } %>
   </body>
 </html>
 
