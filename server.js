@@ -7,6 +7,9 @@ const morgan = require("morgan");
 const authController = require("./controllers/auth.js");
 const session = require('express-session');
 
+const isSignedIn = require('./middleware/is-signed-in.js');
+const passUserToView = require('./middleware/pass-user-to-view.js');
+
 const app = express();
 
 
@@ -42,6 +45,7 @@ app.use(
     })
   );
 
+app.use(passUserToView);
 
 
 
@@ -52,6 +56,7 @@ app.get("/", async (req, res) => {
   });
   
 app.use("/auth", authController);
+app.use(isSignedIn);
 
 
 app.get("/todos", async (req, res) => {
