@@ -87,11 +87,11 @@ app.get("/todos", (req, res) => {
 app.get("/todos/new", (req, res) => {
     res.render("todos/new.ejs");
   });
-  app.post("/todos", async (req, res) => {
+app.post("/todos", async (req, res) => {
     console.log(req.body);
     res.redirect("/todos/new");
   });
-  app.post("/todos", async (req, res) => {
+app.post("/todos", async (req, res) => {
     if (req.body.isFinished === "on") {
       req.body.isFinished = true;
     } else {
@@ -101,12 +101,12 @@ app.get("/todos/new", (req, res) => {
     res.redirect("/todos/new");
   });
 
-  app.get("/todos/:todoId", async (req, res) => {
+app.get("/todos/:todoId", async (req, res) => {
     const foundTodo = await Todo.findById(req.params.todoId)
     res.render("todos/show.ejs", { todo: foundTodo});
   });
 
-  app.delete("/todos/:todoId", async (req, res) => {
+app.delete("/todos/:todoId", async (req, res) => {
     await Todo.findByIdAndDelete(req.params.todoId)
     res.redirect("/todos");
   });

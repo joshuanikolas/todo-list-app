@@ -1,8 +1,6 @@
-<!-- views/partials/_navbar.ejs -->
-
 <nav>
     <% if(user) { %>
-    <a href="/todos/<%= todo._id %>">Your Apps</a>
+    <a href="/todos/<%= user._id %>"></a>
       <a href="/auth/sign-out">Sign Out</a>
     <% } else { %>
       <a href="/auth/sign-in">Sign In</a>
