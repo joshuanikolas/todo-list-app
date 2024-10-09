@@ -5,6 +5,7 @@ const mongoose = require("mongoose");
 const methodOverride = require("method-override"); // new
 const morgan = require("morgan"); 
 const authController = require("./controllers/auth.js");
+const todosController = require('./controllers/todos.js');
 const session = require('express-session');
 
 const isSignedIn = require('./middleware/is-signed-in.js');
@@ -20,23 +21,11 @@ mongoose.connection.on("connected", () => {
   });
 
 
-  app.use(express.urlencoded({ extended: false }));
+app.use(express.urlencoded({ extended: false }));
 
 const Todo = require("./models/todo.js");
 app.use(methodOverride("_method"));
 app.use(morgan('dev'));
-
-
-const createTodo = async() => {
-    const todoData = {
-
-    }
-}
-const { todo } = require("node:test");
-
-app.use(express.urlencoded({ extended: false }));
-app.use(methodOverride("_method"));
-app.use(morgan("dev"));
 app.use(
     session({
       secret: process.env.SESSION_SECRET,
@@ -45,18 +34,30 @@ app.use(
     })
   );
 
+
+const createTodo = async() => {
+    const todoData = {
+
+    }
+}
+const { todo } = require("node:test");
 app.use(passUserToView);
 
 
 
 app.get("/", async (req, res) => {
-    res.render("index.ejs", {
-        user: req.session.user,
-    });
-  });
+    if (req.session.user) {
+        res.redirect(`/users/${req.session.user._id}/todos`)
+    } else {
+            res.render("index.ejs", {
+                user: req.session.user,
+        });
+    }   
+});
   
 app.use("/auth", authController);
 app.use(isSignedIn);
+app.use('/users/:userId/todos', todosController)
 
 
 app.get("/todos", async (req, res) => {
@@ -127,13 +128,17 @@ app.get("/todos/:todoId/edit", async (req, res) => {
         res.redirect(`/todos/${req.params.todoId}`);
       });
 
-      let port;
-if (process.env.PORT) {
-  port = process.env.PORT;
-} else {
-  port = 3000;
-}
+//       let port;
+// if (process.env.PORT) {
+//   port = process.env.PORT;
+// } else {
+//   port = 3000;
+// }
 
-app.listen(port, () => {
-    console.log(`The express app is ready on port ${port}!`);
-  });
+// app.listen(port, () => {
+//     console.log(`The express app is ready on port ${port}!`);
+//   });
+
+app.listen(3000, () => {
+    console.log('Listening on Port 3000')
+})

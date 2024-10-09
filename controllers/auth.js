@@ -3,7 +3,6 @@ const router = express.Router()
 const bcrypt = require('bcrypt')
 const User = require('../models/todo.js')
 
-
 router.get('/sign-up', (req, res) => {
     res.render('auth/sign-up.ejs')
 })
@@ -28,9 +27,8 @@ router.post('/sign-up', async (req, res) => {
         }
         const hashedPassword = bcrypt.hashSync(req.body.password, 10);
         req.body.password = hashedPassword;
-        await User.create(req.body)
-
-        res.redirect('/auth/sign-in');
+        const user = await User.create(req.body);
+            res.redirect('/auth/sign-in');
     } catch (error) {
         console.log(error);
         res.redirect('/');
@@ -61,6 +59,6 @@ router.post('/sign-in', async (req, res) => {
         console.log(error);
         res.redirect('/')
     }
-})
+});
 
 module.exports = router;

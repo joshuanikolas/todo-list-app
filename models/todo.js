@@ -26,10 +26,11 @@ const userSchema = new mongoose.Schema({
       type: String,
       required: true,
     },
+    todos: [todoSchema]
   });
 
 
-const Todo = mongoose.model("Todo", todoSchema);
+const User = mongoose.model("user", userSchema);
 
-module.exports = Todo;
+module.exports = User;
 
