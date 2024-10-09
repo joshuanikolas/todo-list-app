@@ -8,16 +8,15 @@
   <body>
     <%- include('../partials/_navbar.ejs') %>
     <h1>Welcome to Todo List App!</h1>
-    <p>An app for organization and having all your tasks in one app.</p>
 
-    <div>
+    <p>An app for organization and having all your tasks in one app.</p>
       <h2>Your Current Tasks</h2>
         <a href="/users/<%=user._id%>/todos/new">Add a Task</a>
-      </div>
-      <ul>
-        <% todos.forEach(todo => { %>
-          <li><%= todo.name %></li>
-        <% }); %>
+        <ul>
+          <% todos.forEach((todo)=>{ %>
+            <li><%= todo.name %> at <%= todo.date %></li>
+          <% }) %>
+        </ul>
     </body>
   </html>
 

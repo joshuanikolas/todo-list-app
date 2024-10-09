@@ -24,7 +24,7 @@ mongoose.connection.on("connected", () => {
 const Todo = require("./models/todo.js");
 app.use(express.urlencoded({ extended: false }));
 app.use(methodOverride("_method"));
-// app.use(morgan('dev'));
+app.use(morgan('dev'));
 app.use(
     session({
       secret: process.env.SESSION_SECRET,
