@@ -1,10 +1,11 @@
 const express = require('express');
 const router = express.Router();
 
-const User = require('../models/todo.js');
+const User = require('../models/user.js');
 // const { todo } = require('node:test');
 
 
+  
 //////index route//////
 router.get('/', async (req, res) => {
     try {
@@ -18,8 +19,8 @@ router.get('/', async (req, res) => {
 
 
 /////new route/////
-router.get('/new', async (req, res) => {
-    res.render('todos/new.ejs');
+router.get('/new', (req, res) => {
+    res.render('./new.ejs');
   });
   
 router.post("/", async (req, res) => {
@@ -51,9 +52,7 @@ router.post('/', async (req, res) => {
 router.get('/', async (req, res) => {
     try {
       const currentUser = await User.findById(req.session.user._id);
-      res.render('todos/index.ejs', {
-        todos: currentUser.todos,
-      });
+      res.render('todos/index.ejs', {todos: currentUser.todos,});
     } catch (error) {
       console.log(error)
       res.redirect('/')
@@ -138,6 +137,11 @@ router.put('/:todoId', async (req, res) => {
 //                 user: req.session.user,
 //         });
 //     }   
+// });
+
+// router.get("/todos/:todoId", async (req, res) => {
+//     const foundTodo = await Todo.findById(req.params.todoId);
+//     res.render("todos/show.ejs", { todo: foundTodo });
 // });
   
 // router.use("/auth", authController);

@@ -13,10 +13,9 @@
       <h2>Your Current Tasks</h2>
         <a href="/users/<%=user._id%>/todos/new">Add a Task</a>
         <ul>
-          <% todos.forEach((todo)=>{ %>
+          <% todos.forEach(todo =>{ %>
             <li><%= todo.name %> at <%= todo.date %></li>
           <% }) %>
-        </ul>
     </body>
   </html>
 
