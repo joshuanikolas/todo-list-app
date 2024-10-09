@@ -21,11 +21,10 @@ mongoose.connection.on("connected", () => {
   });
 
 
-app.use(express.urlencoded({ extended: false }));
-
 const Todo = require("./models/todo.js");
+app.use(express.urlencoded({ extended: false }));
 app.use(methodOverride("_method"));
-app.use(morgan('dev'));
+// app.use(morgan('dev'));
 app.use(
     session({
       secret: process.env.SESSION_SECRET,
@@ -34,6 +33,8 @@ app.use(
     })
   );
 
+  app.use(passUserToView);
+
 
 const createTodo = async() => {
     const todoData = {
@@ -41,92 +42,94 @@ const createTodo = async() => {
     }
 }
 const { todo } = require("node:test");
-app.use(passUserToView);
 
 
 
 app.get("/", async (req, res) => {
-    if (req.session.user) {
-        res.redirect(`/users/${req.session.user._id}/todos`)
-    } else {
-            res.render("index.ejs", {
-                user: req.session.user,
+        res.render("index.ejs", {
+            user: req.session.user,
         });
-    }   
 });
   
-app.use("/auth", authController);
-app.use(isSignedIn);
-app.use('/users/:userId/todos', todosController)
 
-
-app.get("/todos", async (req, res) => {
-    const allTodos = await Todo.find({});
-    res.render("todos/index.ejs", { todos: allTodos});
-  });
-
-
-
-app.post("/todos", async (req, res) => {
-    if (req.body.isFinished === "on") {
-      req.body.isFinished = true;
+////index page////
+app.get('/', (req, res) => {
+    if (req.session.user) {
+      res.redirect(`/users/${req.session.user._id}/todos`);
     } else {
-      req.body.isFinished = false;
+      res.render('index.ejs');
     }
-    await Todo.create(req.body);
-    res.redirect("/todos"); 
   });
+  
+
+
+// app.get("/todos", async (req, res) => {
+//     const allTodos = await Todo.find({});
+//     res.render("todos/index.ejs", { todos: allTodos});
+//   });
+
+
+
+// app.post("/todos", async (req, res) => {
+//     if (req.body.isFinished === "on") {
+//       req.body.isFinished = true;
+//     } else {
+//       req.body.isFinished = false;
+//     }
+//     await Todo.create(req.body);
+//     res.redirect("/todos"); 
+//   });
   
   
 
-app.get("/todos", (req, res) => {
-    res.render("todos/index.ejs");
-})
+// app.get("/todos", (req, res) => {
+//     res.render("todos/index.ejs");
+// })
 
 
-app.get("/todos/new", (req, res) => {
-    res.render("todos/new.ejs");
-  });
-app.post("/todos", async (req, res) => {
-    console.log(req.body);
-    res.redirect("/todos/new");
-  });
-app.post("/todos", async (req, res) => {
-    if (req.body.isFinished === "on") {
-      req.body.isFinished = true;
-    } else {
-      req.body.isFinished = false;
-    }
-    await Todo.create(req.body);
-    res.redirect("/todos/new");
-  });
+// app.get("/todos/new", (req, res) => {
+//     res.render("todos/new.ejs");
+//   });
+// app.post("/todos", async (req, res) => {
+//     console.log(req.body);
+//     res.redirect("/todos/new");
+//   });
+// app.post("/todos", async (req, res) => {
+//     if (req.body.isFinished === "on") {
+//       req.body.isFinished = true;
+//     } else {
+//       req.body.isFinished = false;
+//     }
+//     await Todo.create(req.body);
+//     res.redirect("/todos/new");
+//   });
 
-app.get("/todos/:todoId", async (req, res) => {
-    const foundTodo = await Todo.findById(req.params.todoId)
-    res.render("todos/show.ejs", { todo: foundTodo});
-  });
+// app.get("/todos/:todoId", async (req, res) => {
+//     const foundTodo = await Todo.findById(req.params.todoId)
+//     res.render("todos/show.ejs", { todo: foundTodo});
+//   });
 
-app.delete("/todos/:todoId", async (req, res) => {
-    await Todo.findByIdAndDelete(req.params.todoId)
-    res.redirect("/todos");
-  });
+// app.delete("/todos/:todoId", async (req, res) => {
+//     await Todo.findByIdAndDelete(req.params.todoId)
+//     res.redirect("/todos");
+//   });
   
-app.get("/todos/:todoId/edit", async (req, res) => {
-    const foundTodo = await Todo.findById(req.params.todoId);
-    res.render("todos/edit.ejs", {
-        todo: foundTodo,
-      });
-    });
+// app.get("/todos/:todoId/edit", async (req, res) => {
+//     const foundTodo = await Todo.findById(req.params.todoId);
+//     res.render("todos/edit.ejs", {
+//         todo: foundTodo,
+//       });
+//     });
 
-    app.put("/todos/:todoId", async (req, res) => {
-        if (req.body.isFinished === "on") {
-          req.body.isFinished = true;
-        } else {
-          req.body.isFinished = false;
-        }
-        await Todo.findByIdAndUpdate(req.params.todoId, req.body);
-        res.redirect(`/todos/${req.params.todoId}`);
-      });
+//     app.put("/todos/:todoId", async (req, res) => {
+//         if (req.body.isFinished === "on") {
+//           req.body.isFinished = true;
+//         } else {
+//           req.body.isFinished = false;
+//         }
+//         await Todo.findByIdAndUpdate(req.params.todoId, req.body);
+//         res.redirect(`/todos/${req.params.todoId}`);
+//       });
 
 //       let port;
 // if (process.env.PORT) {
@@ -138,6 +141,10 @@ app.get("/todos/:todoId/edit", async (req, res) => {
 // app.listen(port, () => {
 //     console.log(`The express app is ready on port ${port}!`);
 //   });
+
+app.use("/auth", authController);
+app.use(isSignedIn);
+app.use('/users/:userId/todos', todosController)
 
 app.listen(3000, () => {
     console.log('Listening on Port 3000')

@@ -6,22 +6,23 @@
     <title>Create a Task</title>
   </head>
   <body>
+    <%- include('../partials/_navbar.ejs') %>
     <h1>Create Your New Todo Task</h1>
     <div>   
-        <a href="/users/<%= currentUser._id %>/todos">Back to Your Tasks</a>
+        <a href="/users/<%=user._id %>/todos">Back to Your Tasks</a>
 
-        <form action="/todos" method="POST">
+        <form action="/users/<%= user._id %>/todos" method="POST">
             <label for="name">Todo Name:</label>
             <input type="text" name="name" id="name" required>
 
             <label for="date">Date:</label>
             <input type="text" name="date" id="date">
 
-            <label for="note">Notes:</label>
+            <label for="notes">Notes:</label>
             <input type="text" name="notes" id="notes">
             
             <input type="checkbox" name="status" id="status">
-            <label>Did you finish?</label>
+            <label for="isFinished">Did you finish?</label>
 
             <button type="submit">Add Task</button>
          </form>

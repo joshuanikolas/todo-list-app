@@ -26,7 +26,7 @@ const userSchema = new mongoose.Schema({
       type: String,
     //   required: true,
     },
-    todos: [todoSchema]
+    todos: [todoSchema],
   });
 
 const User = mongoose.model("user", userSchema);

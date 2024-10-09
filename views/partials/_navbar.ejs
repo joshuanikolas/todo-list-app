@@ -1,7 +1,7 @@
 <nav>
     <% if(user) { %>
-    <a href="/todos/<%= user._id %>"></a>
-      <a href="/auth/sign-out">Sign Out</a>
+        <a href="/users/<%= user._id %>/todos">Your Tasks</a>
+        <a href="/auth/sign-out">Sign Out</a>
     <% } else { %>
       <a href="/auth/sign-in">Sign In</a>
       <a href="/auth/sign-up">Sign Up</a>

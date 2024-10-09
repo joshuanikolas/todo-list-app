@@ -11,24 +11,15 @@
     <p>An app for organization and having all your tasks in one app.</p>
 
     <div>
-        <a href="/todos">Your Tasks</a>
-        <a href="/users/<%= currentUser._id %>/todos/new">Add New Task</a>
-    </div>
-
-    <h2>Your Todo List</h2>
-    <ul>
+      <h2>Your Current Tasks</h2>
+        <a href="/users/<%=user._id%>/todos/new">Add a Task</a>
+      </div>
+      <ul>
         <% todos.forEach(todo => { %>
-          <li>
-            <a href="/todos/<%= todo._id %>"> 
-              <p><%= todo.name %></p>
-            </a>
-          <p>Date: <%= todo.date %></p>
-          <p>Notes: <%= todo.notes %></p>
-          <p>Completed? : <%= todo.isFinished %></p>
-            
-        </li>
+          <li><%= todo.name %></li>
         <% }); %>
-      </ul>
+    </body>
+  </html>
 
   </body>
 </html>
