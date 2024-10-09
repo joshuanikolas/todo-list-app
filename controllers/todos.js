@@ -3,15 +3,18 @@ const router = express.Router();
 
 const User = require('../models/todo.js');
 
-router.get("/", async (req, res) => {
-    res.render("index.ejs", {
-        user: req.session.user,
-    });
-  });
+// router.get("/", async (req, res) => {
+//     res.render("index.ejs", {
+//         user: req.session.user,
+//     });
+//   });
 
 router.get('/', async (req, res) => {
     try {
-      res.render('todos/index.ejs');
+        const currentUser = await User.findById(req.session.user._id);
+        const allTodos = currentUser.todos
+    res.render("todos/index.ejs", { todos: allTodos, currentUser});
+
     } catch (error) {
       console.log(error)
       res.redirect('todos/index.ejs')
@@ -19,18 +22,17 @@ router.get('/', async (req, res) => {
   });
 
 router.get("/todos", async (req, res) => {
-    const allTodos = await Todo.find();
     res.render("todos/index.ejs", { todos: allTodos});
   });
 
-router.post("/todos", async (req, res) => {
+router.post("/users/<%= currentUser._id %>/todos", async (req, res) => {
     if (req.body.isFinished === "on") {
       req.body.isFinished = true;
     } else {
       req.body.isFinished = false;
     }
     await Todo.create(req.body);
-    res.redirect("/todos"); 
+    res.redirect("/users/<%= currentUser._id %>/todos"); 
   });
   
   
@@ -40,21 +42,21 @@ router.get("/todos", (req, res) => {
 })
 
 
-router.get("/todos/new", (req, res) => {
+router.get("/users/<%= currentUser._id %>/todos/new", (req, res) => {
     res.render("todos/new.ejs");
   });
-router.post("/todos", async (req, res) => {
+router.post("/", async (req, res) => {
     console.log(req.body);
     res.redirect("/todos/new");
   });
-router.post("/todos", async (req, res) => {
+router.post("/users/<%= currentUser._id %>/todos/new", async (req, res) => {
     if (req.body.isFinished === "on") {
       req.body.isFinished = true;
     } else {
       req.body.isFinished = false;
     }
-    await Todo.create(req.body);
-    res.redirect("/todos/new");
+    await User.create(req.body);
+    res.redirect("/users/<%= currentUser._id %>/todos/new");
   });
 
 router.get("/todos/:todoId", async (req, res) => {
@@ -67,9 +69,9 @@ router.delete("/todos/:todoId", async (req, res) => {
     res.redirect("/todos");
   });
   
-router.get("/todos/:todoId/edit", async (req, res) => {
+router.get("/users/<%= currentUser._id %>/todos", async (req, res) => {
     const foundTodo = await Todo.findById(req.params.todoId);
-    res.render("todos/edit.ejs", {
+    res.render("/todos/edit.ejs", {
         todo: foundTodo,
       });
     });
@@ -86,3 +88,6 @@ router.put("/todos/:todoId", async (req, res) => {
 
 
 module.exports = router;
+
+
+// /users/<%= currentUser._id %>/todos/new

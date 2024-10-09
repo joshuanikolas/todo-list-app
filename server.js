@@ -61,7 +61,7 @@ app.use('/users/:userId/todos', todosController)
 
 
 app.get("/todos", async (req, res) => {
-    const allTodos = await Todo.find();
+    const allTodos = await Todo.find({});
     res.render("todos/index.ejs", { todos: allTodos});
   });
 

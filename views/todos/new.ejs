@@ -8,7 +8,7 @@
   <body>
     <h1>Create Your New Todo Task</h1>
     <div>   
-        <a href="/todos/">Back to Your Tasks</a>
+        <a href="/users/<%= currentUser._id %>/todos">Back to Your Tasks</a>
 
         <form action="/todos" method="POST">
             <label for="name">Todo Name:</label>

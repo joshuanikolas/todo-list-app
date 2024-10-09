@@ -12,7 +12,7 @@
 
     <div>
         <a href="/todos">Your Tasks</a>
-        <a href="/todos/new">Add New Task</a>
+        <a href="/users/<%= currentUser._id %>/todos/new">Add New Task</a>
     </div>
 
     <h2>Your Todo List</h2>
@@ -24,7 +24,7 @@
             </a>
           <p>Date: <%= todo.date %></p>
           <p>Notes: <%= todo.notes %></p>
-          <p>Completed? : <%= todo.isFinished %></p
+          <p>Completed? : <%= todo.isFinished %></p>
             
         </li>
         <% }); %>
