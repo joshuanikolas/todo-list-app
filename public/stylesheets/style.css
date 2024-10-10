@@ -58,6 +58,7 @@ body {
 
   h2 {
     text-align: center;
+    font-size: 30px;
   }
   
   .router-buttons {
@@ -75,13 +76,17 @@ body {
   .add-task {
     color: white;
     margin: auto;
+    font-weight: bold;
+    font-size: 20px;
+
+
   }
   
 
   .tasks-container {
     font-weight: bold;
     color: white;
-    font-size: 25px;
+    font-size: 20px;
     text-align: center;
     margin-top: 40px;
     margin-left: 180px;
@@ -90,3 +95,42 @@ body {
     background-color: rgb(83, 127, 160);
     border-radius: 30px;
   }
+
+  .task-info {
+    font-weight: bold;
+    color: white;
+    font-size: 20px;
+    text-align: center;
+    margin-top: 40px;
+    margin-left: 180px;
+    margin-right: 180px;
+    margin-bottom: 40px;
+    background-color: rgb(3, 89, 129);
+    border-radius: 30px;
+  }
+
+  .button {
+    padding: 10px;
+    background-color: #ba4961;
+    color: white;
+    border: 0;
+    border-radius: 30px;
+    font-size: 20;
+    display: flex;
+    margin-top: 10px;
+    margin-right: 920px;
+    margin-bottom: 10px;
+  }
+
+.edit-container {
+    font-weight: bold;
+    color: white;
+    font-size: 20px;
+    text-align: center;
+    margin-top: 40px;
+    margin-left: 180px;
+    margin-right: 180px;
+    margin-bottom: 40px;
+    background-color: rgb(3, 89, 129);
+    border-radius: 30px;
+}

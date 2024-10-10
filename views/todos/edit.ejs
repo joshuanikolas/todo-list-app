@@ -9,22 +9,29 @@
 <body>
     <%- include('../partials/_navbar.ejs') %>
     <h1>Update <%= todo.name %></h1>
+
     <form action="/users/<%= user._id %>/todos/<%= todo._id %>?_method=PUT"
-    method="POST">     
+    method="POST"> 
+<div class="edit-container">
+    <div>
         <label for="name">Name:</label>
         <input type="text" name="name" id="name" value="<%= todo.name %>"/>
-  
+    </div>
+    <div>
         <label for="date">Date:</label>
         <input type="text" name="date" id="date">
-
+    </div>
         <label for="note">Notes:</label>
         <input type="text" name="notes" id="notes">
-
+    <div>
         <label for="isFinished">Completed?</label>
         <input type="checkbox" name="isFinished" <% if (todo.isFinished) { %>checked<% } %> >
-
+    </div>
+</div>
       <button type="submit">Update Task</button>
     </form>
+    <div class="button">
     <a href="/users/:userId/todos">Back to Tasks</a>
+    </div>
   </body>
   

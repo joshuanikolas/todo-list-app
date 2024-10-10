@@ -10,6 +10,7 @@
     <%- include('../partials/_navbar.ejs') %>
     <a href="/users/:userId/todos/">Back to My Tasks</a>
     <h1><%= todo.name %></h1>
+    <div class="task-info"
     <p>Date: <%= todo.date %></p>
     <p>Notes: <%= todo.notes %></p>
     <% if (todo.isFinished) { %>
@@ -17,13 +18,18 @@
       <% } else { %>
         <p>This task is not completed!</p>
       <% } %>
+      </div>
 
     <form action="/users/<%= user._id %>/todos/<%= todo._id %>?_method=DELETE"
       method="POST">
         <button type="submit">Delete This Task</button>
     </form>
+    <div class="button">
     <a href="/users/<%= user._id %>/todos/<%= todo._id %>/edit">Edit this application</a>
+    </div>
+        <div class="button">
     <a href="/users/:userId/todos">Back to Tasks</a>
+        </div>
     </form>
    
   </body>
