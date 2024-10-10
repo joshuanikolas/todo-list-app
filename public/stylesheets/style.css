@@ -45,5 +45,48 @@ body {
     text-align: center;
   }
   
+  .task-headers-intro {
+    font-weight: bold;
+    color: white;
+    font-size: 25px;
+    text-align: center;
+    margin-top: 40px;
+    margin-bottom: 40px;
+    background-color: rgb(148, 128, 101);
+    border-radius: 30px;
+  }
+
+  h2 {
+    text-align: center;
+  }
   
+  .router-buttons {
+    padding: 10px;
+    background-color: #ce4866;
+    color: white;
+    border: 0;
+    border-radius: 30px;
+    font-size: 20;
+    display: flex;
+    margin-bottom: 40px;
+
+  }
+
+  .add-task {
+    color: white;
+    margin: auto;
+  }
   
+
+  .tasks-container {
+    font-weight: bold;
+    color: white;
+    font-size: 25px;
+    text-align: center;
+    margin-top: 40px;
+    margin-left: 180px;
+    margin-right: 180px;
+    margin-bottom: 40px;
+    background-color: rgb(83, 127, 160);
+    border-radius: 30px;
+  }

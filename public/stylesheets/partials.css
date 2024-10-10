@@ -48,7 +48,8 @@ body {
 }
 
 h1 {
-    color: rgb(81, 72, 60);
+    color: rgb(255, 175, 78);
+    text-decoration: underline;
 }
 
 form {
@@ -59,7 +60,7 @@ form {
 
 button {
     padding: 10px;
-    background-color: #ce4866;
+    background-color: #ba4961;
     color: white;
     border: 0;
     border-radius: 30px;

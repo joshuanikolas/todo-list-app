@@ -8,11 +8,19 @@
   </head>
   <body>
     <%- include('../partials/_navbar.ejs') %>
+    
+        <div class="task-headers-intro">
     <h1>Welcome to Todo List App!</h1>
-
+        
     <p>An app for organization and having all your tasks in one app.</p>
+        </div>
+        <div class="h2">
       <h2>Your Current Tasks</h2>
-            <a href="/users/<%= currentUser._id %>/todos/new">Add New task</a>
+        </div>
+              <div class="router-buttons">
+            <a class="add-task" href="/users/<%= currentUser._id %>/todos/new">Add New task</a>
+                </div>
+                <div class="tasks-container">
             <% todos.forEach(todo =>{ %>
               <li>
                 <a href="/users/<%= currentUser._id %>/todos/<%=todo._id %>">
@@ -22,6 +30,7 @@
                   <ul>Completed? <%= todo.isFinished %></ul>
               </li>
             <% }) %> 
+                </div>
     </body>
   </html>
 
