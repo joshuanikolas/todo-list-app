@@ -26,7 +26,7 @@ router.post('/', async (req, res) => {
     }
   });
 
-////////index route////////
+////////index route/////////
 router.get('/', async (req, res) => {
     try {
       const currentUser = await User.findById(req.session.user._id);

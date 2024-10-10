@@ -12,16 +12,15 @@
     <p>An app for organization and having all your tasks in one app.</p>
       <h2>Your Current Tasks</h2>
             <a href="/users/<%= currentUser._id %>/todos/new">Add New task</a>
-            <li>
-              <% todos.forEach(todo =>{ %>
-                <a href="/users/<%= currentUser._id %>/todos/<%=todo._id %>%>">
-                <%= todo.name %> 
-                <%= todo.date %>
-                <%= todo.notes %>
-                <%= todo.isFinished %>
-                </a>
-            </li>
-              <% }) %> 
+            <% todos.forEach(todo =>{ %>
+              <li>
+                <a href="/users/<%= currentUser._id %>/todos/<%=todo._id %>">
+                <%= todo.name %> </a>
+                  <ul>Date: <%= todo.date %></ul>
+                  <ul>Notes: <%= todo.notes %></ul>
+                  <ul>Completed? <%= todo.isFinished %></ul>
+              </li>
+            <% }) %> 
     </body>
   </html>
 
