@@ -3,27 +3,30 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="/stylesheets/style.css" />
     <title>Todo App</title>
   </head>
   <body>
     <%- include('./partials/_navbar.ejs') %>
-    <h1>Welcome to Todo List App!</h1>
-    <h3>An app for organization and having all your tasks in one app.</h3>
-
+    <h1 class="main-header">Welcome to Todo List App!</h1>
+    <h3 class="subheader">An app for organization and having all your tasks in one app.</h3>
+        </div>
+    <div class="auth-links">
     <p>Existing user:</p>
-    <a href="/auth/sign-in">sign in</a>
-
+    <a class="sign-link" href="/auth/sign-in">sign in</a>
+        
         <% if (user) { %>
         <h1>Welcome to the app, <%= user.username %>!</h1>
         <p>
-        <a href="/auth/sign-out">Sign out</a>
+        <a class="sign-link" href="/auth/sign-out">Sign out</a>
         </p>
             <% } else { %>
     <p>New user? Create an account:</p>
         <p>
-            <a href="/auth/sign-up">Sign up</a>
+            <a class="sign-link" href="/auth/sign-up">Sign up</a>
         </p>
         <% } %>
+    </div>
   </body>
 </html>
 
