@@ -7,7 +7,7 @@
   </head>
   <body>
     <%- include('../partials/_navbar.ejs') %>
-    <a href="/todos/">Back to My Tasks</a>
+    <a href="/users/:userId/todos/">Back to My Tasks</a>
     <h1><%= todo.name %></h1>
     <p>Date: <%= todo.date %></p>
     <p>Notes: <%= todo.notes %></p>
@@ -22,7 +22,7 @@
         <button type="submit">Delete This Task</button>
     </form>
     <a href="/users/<%= user._id %>/todos/<%= todo._id %>/edit">Edit this application</a>
-    <a href="/todos">Back to Tasks</a>
+    <a href="/users/:userId/todos">Back to Tasks</a>
     </form>
    
   </body>

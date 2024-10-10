@@ -9,9 +9,9 @@
     <%- include('../partials/_navbar.ejs') %>
     <h1>Create Your New Todo Task</h1>
     <div>   
-        <a href="/users/<%=user._id %>/todos">Back to Your Tasks</a>
+        <a href="/users/:userId/todos">Back to Your Tasks</a>
 
-        <form action="/users/<%= user._id %>/todos" method="POST">
+        <form action="/users/<%= user._id %>/todos" method="POST">            
             <label for="name">Todo Name:</label>
             <input type="text" name="name" id="name" required>
 

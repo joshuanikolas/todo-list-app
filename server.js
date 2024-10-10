@@ -13,15 +13,11 @@ const passUserToView = require('./middleware/pass-user-to-view.js');
 
 const app = express();
 
-
-process.env.MONGODB_URI= 'mongodb+srv://joshuanikolass:Bebee0904.@joshuanikolass.8y5s8.mongodb.net/todo-list-app?retryWrites=true&w=majority&appName=joshuanikolass'
 mongoose.connect(process.env.MONGODB_URI)
 mongoose.connection.on("connected", () => {
     console.log(`Connected to MongoDB ${mongoose.connection.name}.`);
   });
 
-
-const Todo = require("./models/user.js");
 app.use(express.urlencoded({ extended: false }));
 app.use(methodOverride("_method"));
 app.use(morgan('dev'));
@@ -35,24 +31,8 @@ app.use(
 
 app.use(passUserToView);
 
+///////main index route///////
 
-const createTodo = async() => {
-    const todoData = {
-
-    }
-}
-const { todo } = require("node:test");
-
-
-
-app.get("/", async (req, res) => {
-        res.render("index.ejs", {
-            user: req.session.user,
-        });
-});
-  
-
-////index page////
 app.get('/', (req, res) => {
     if (req.session.user) {
       res.redirect(`/users/${req.session.user._id}/todos`);
@@ -61,11 +41,6 @@ app.get('/', (req, res) => {
     }
   });
   
-  app.get("/todos/:todoId", async (req, res) => {
-    const foundTodo = await Todo.findById(req.params.todoId);
-    res.render("todos/show.ejs", { todo: foundTodo });
-});
-
 app.use("/auth", authController);
 app.use(isSignedIn);
 app.use('/users/:userId/todos', todosController);
