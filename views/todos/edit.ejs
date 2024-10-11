@@ -19,13 +19,13 @@
     </div>
     <div>
         <label for="date">Date:</label>
-        <input type="text" name="date" id="date">
+        <input type="text" name="date" id="date" value="<%= todo.date %>"/>
     </div>
         <label for="note">Notes:</label>
-        <input type="text" name="notes" id="notes">
+        <input type="text" name="notes" id="notes" value="<%= todo.notes %>"/>
     <div>
         <label for="isFinished">Completed?</label>
-        <input type="checkbox" name="isFinished" <% if (todo.isFinished) { %>checked<% } %> >
+        <input type="checkbox" name="isFinished" <% if (todo.isFinished) { %>checked<% } %> > 
     </div>
 </div>
       <button type="submit">Update Task</button>
