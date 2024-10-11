@@ -49,6 +49,6 @@ app.use("/auth", authController);
 app.use(isSignedIn);
 app.use('/users/:userId/todos', todosController);
 
-app.listen(3000, () => {
-    console.log('Listening on Port 3000')
+app.listen(port, () => {
+    console.log(`Listening on port ${port}`)
 })
